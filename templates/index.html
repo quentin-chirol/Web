@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Assurance - Jaux concours </title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/favicon.ico') }}" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet" />
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg text-uppercase" id="mainNav">
+            <div class="container d-flex justify-content-center">
+                <a class="navbar-brand" href="#page-top">
+                    <img src="{{ url_for('static', filename='img/logo.jpg') }}" alt="Logo">
+                </a>
+            </div>
+        </nav>
+        <!-- Banner Section -->
+        <img src="{{ url_for('static', filename='img/jc.png') }}" class="img-fluid w-100" alt="Banner Image">
+        <!-- Banner Section -->
+        <div class="container mt-5">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">🎁 À GAGNER : Un séjour à EuropaPark avec la personne que vous voulez !*</h5>
+                    <p class="card-text">
+                        Helvetic Wealth Advisor, cabinet de conseils en assurance suisse, a décidé aujourd’hui de vous faire un beau cadeau ! Et parce que de bonnes vacances rime avec une bonne assurance.
+                    </p>
+                    <p class="card-text">
+                        Profitez de :
+                    </p>
+                    <ul class="list-unstyled">
+                        <li>👉 3 jours d'attractions</li>
+                        <li>👉 Avec la personne de votre choix</li>
+                        <li>👉 Et un accès aux parks et nuits d’Hôtel offerts</li>
+                    </ul>
+                    <p class="card-text">
+                        Pour participer, c’est tout simple, inscrivez-vous via le formulaire ci-dessous.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <section class="page-section" id="contact">
+            <div class="container">
+                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Jeux concours</h2>
+                <div class="divider-custom">
+                    <div class="divider-custom-line"></div>
+                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                    <div class="divider-custom-line"></div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-lg-8 col-xl-7">
+                        <form id="contactForm" novalidate>
+                            <div class="form-floating mb-3">
+                                <input class="form-control" id="name" name="name" type="text" placeholder="Enter votre prenom..." required />
+                                <label for="name">Prénom</label>
+                                <div class="invalid-feedback">Entrer Le Prénom</div>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input class="form-control" id="nom" name="nom" type="text" placeholder="Enter votre nom..." required />
+                                <label for="nom">Nom</label>
+                                <div class="invalid-feedback">Entrer Le Nom De Famille</div>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input class="form-control" id="email" name="email" type="email" placeholder="name@example.com" required />
+                                <label for="email">Email address</label>
+                                <div class="invalid-feedback">Entrer Un Email Valide</div>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input class="form-control" id="phone" name="phone" type="tel" placeholder="(123) 456-7890" required />
+                                <label for="phone">Numero de téléphone</label>
+                                <div class="invalid-feedback">Entrée un numero de téléphone</div>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input class="form-control" id="adresse" name="adresse" type="text" placeholder="Rue de la Jolie" required />
+                                <label for="adresse">Adresse</label>
+                                <div class="invalid-feedback">Entrée une adresse</div>
+                            </div>
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" id="checkbox" name="checkbox" type="checkbox" required />
+                                <label class="form-check-label" for="checkbox">J'accepte de participer au tirage au sort du 20 août 2024. D'être recontacté.e par téléphone et email, et de rencontrer un agent d'assurance</label>
+                                <div class="invalid-feedback">Vous devez être d'accord avant d'envoyer</div>
+                            </div>       
+                            <div class="text-center">
+                                <button class="btn btn-primary btn-xl" id="submitButton" type="submit">Je participe au jeux concours</button>
+                            </div>
+                        </form>
+                        <div class="d-none" id="submitSuccessMessage">
+                            <div class="text-center mb-3">
+                                <div class="fw-bolder">Form submission successful!</div>
+                                Nous vous recontacterons bientôt.
+                            </div>
+                        </div>
+                        <div class="d-none" id="submitErrorMessage">
+                            <div class="text-center text-danger mb-3">Erreur lors de l'envoi. Veuillez réessayer.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <script>
+            $(document).ready(function() {
+                $('#contactForm').on('submit', function(event) {
+                    event.preventDefault();
+    
+                    // Clear previous feedback
+                    $(this).removeClass('was-validated');
+                    
+                    var isValid = true;
+                    
+                    // Validate each field
+                    $(this).find(':input[required]').each(function() {
+                        if (!this.checkValidity()) {
+                            isValid = false;
+                            $(this).addClass('is-invalid');
+                        } else {
+                            $(this).removeClass('is-invalid');
+                        }
+                    });
+                    
+                    if (isValid) {
+                        // Proceed with AJAX submission
+                        $.ajax({
+                            url: '/submit',
+                            type: 'POST',
+                            data: $(this).serialize(),
+                            success: function(response) {
+                                $('#contactForm')[0].reset(); // Reset form fields
+                            },
+                            error: function(xhr, status, error) {
+                                console.log('Error:', xhr.responseText);
+                                alert('Error: ' + xhr.status + ' - ' + xhr.responseText);
+                            }
+                        });
+                    } else {
+                        // Add Bootstrap validation classes
+                        $(this).addClass('was-validated');
+                    }
+                });
+            });
+        </script>
+        <!-- Footer-->
+        <footer class="footer text-center">
+            <div class="container">
+                <div class="row">
+                    <!-- Footer Location-->
+                    <div class="col-lg-4 mb-5 mb-lg-0">
+                        <h4 class="text-uppercase mb-4">Location</h4>
+                        <p class="lead mb-0">
+                            Fidelity conseils, Rue Caroline 2
+                            <br />
+                            1003, Lausagne
+                        </p>
+                    </div>
+                    <!-- Footer Social Icons-->
+                    <div class="col-lg-4 mb-5 mb-2 mb-lg-0 d-flex flex-column">
+                        <h4 class="text-uppercase mb-4">Contact Me</h4>
+                        <a class="btn btn-outline-light mb-2 px-3" href="#!"><i>Facebook</i></a>
+                        <a class="btn btn-outline-light mb-2 px-3" href="tel:+41766713552"><i>+41 76 671 35 52</i></a>
+                        <a class="btn btn-outline-light mb-2 px-3" href="mailto:info@aides-assurance.ch"><i>info@aides-assurance.ch</i></a>
+                        <a class="btn btn-outline-light mb-2 px-3" href="#!"><i>Société : Helvetic Wealth Advisor</i></a>
+                    </div>
+                    <!-- Footer About Text-->
+                    <div class="col-lg-4">
+                        <h4 class="text-uppercase mb-4">More About</h4>
+                        <p class="lead mb-0">
+                            Helvetic Wealth Advisor est votre partenaire de confiance dans le monde de la gestion de patrimoine en Suisse. Spécialisés dans l’accompagnement financier sur mesure, nous allions expertise locale et solutions globales pour maximiser la croissance et la sécurité de vos investissements. Notre équipe d’experts offre des conseils personnalisés, alliant innovation et rigueur pour répondre à vos besoins spécifiques. Avec Helvetic Wealth Advisor, bénéficiez d’une stratégie financière élégante et efficace, soutenue par une connaissance approfondie du marché suisse. Confiez-nous vos ambitions, nous transformerons vos objectifs en réalité.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Copyright Section-->
+        <div class="copyright py-4 text-center text-white">
+            <div class="container"><small>Copyright &copy; Your Website 2023</small></div>
+        </div>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <!-- * *                               SB Forms JS                               * *-->
+        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </body>
+</html>
